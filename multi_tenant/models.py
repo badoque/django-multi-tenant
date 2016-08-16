@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from .managers import TenantModelManager
+from .managers import TenantModelManager, MultiTenantModelManager
 from django.conf import settings
 
 class Theme(models.Model):
@@ -59,8 +59,7 @@ class MultiTenantModel(models.Model):
     project tables.
     """
 
-    tenants = models.ManyToManyField(Tenant, related_name='tenants')
-    objects = TenantModelManager()
+    objects = MultiTenantModelManager()
 
     class Meta:
         abstract = True

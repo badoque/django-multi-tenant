@@ -11,3 +11,16 @@ class TenantModelManager(models.Manager):
 
     def by_tenants(self, tenants):
         return self.filter(tenant__in=tenants)
+
+
+class MultiTenantModelManager(models.Manager):
+    """
+    This manager makes it easy to filter by tenant
+    """
+
+    def by_tenant(self, tenant):
+        return self.filter(tenants__in=[tenant])
+
+    def by_tenants(self, tenants):
+        return self.filter(tenants__in=tenants)
+
